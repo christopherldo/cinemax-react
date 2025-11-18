@@ -1,6 +1,6 @@
 import { CalendarDays } from "lucide-react";
 
-export const MoveReleaseDate = () => {
+export const MovieReleaseDate = () => {
   return (
     <div className="flex items-center gap-1">
       <CalendarDays size={16} color="#92929D" />
