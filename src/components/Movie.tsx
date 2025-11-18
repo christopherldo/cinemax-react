@@ -8,12 +8,12 @@ interface MovieProps {
 
 export const Movie = ({ movie }: MovieProps) => {
   return (
-    <div className="flex gap-4 min-w-[327px]">
-      <div className="w-28 h-[147px] rounded-lg relative overflow-hidden">
+    <div className="flex gap-4 w-full max-w-sm min-w-0 mx-auto">
+      <div className="w-28 h-[147px] shrink-0 rounded-lg relative overflow-hidden">
         <img
-          className="w-full h-full "
+          className="block w-full h-full "
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt="Movie thumbnail"
+          alt={`${movie.title} movie poster`}
           draggable={false}
         />
         <div className="absolute flex items-center gap-1 top-2 left-2 py-1 px-2 bg-[rgba(37,40,54,0.32)] rounded-lg backdrop-blur-[20px]">
@@ -23,8 +23,8 @@ export const Movie = ({ movie }: MovieProps) => {
           </span>
         </div>
       </div>
-      <div className="w-[199px] flex flex-col gap-3 overflow-hidden">
-        <span className="block font-semibold text-[16px] text-ellipsis overflow-hidden text-nowrap">
+      <div className="max-w-50 sm:max-w-full flex flex-1 flex-col gap-3">
+        <span className="block font-semibold text-[16px] truncate">
           {movie.title}
         </span>
       </div>
