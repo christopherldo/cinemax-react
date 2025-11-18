@@ -2,7 +2,7 @@ import { Heart } from "lucide-react";
 
 export const Account = () => {
   return (
-    <div className="flex items-center gap-4 mx-8 self-center mt-13 min-w-[327px]">
+    <div className="flex items-center gap-4 mx-8 self-center mt-13 w-full max-w-md px-4">
       <img
         src="https://picsum.photos/40"
         alt="Profile picture"
@@ -12,13 +12,13 @@ export const Account = () => {
         <h1 className="font-semibold text-base text-white">
           Hello, Christopher
         </h1>
-        <h2 className="font-medium text-[12px] text-[#92929D]">
+        <h2 className="font-medium text-[12px] text-text-muted">
           Let's stream your favorite movie
         </h2>
       </div>
       <button
         type="button"
-        className="w-8 h-8 rounded-xl bg-[#252836] ml-[41px] flex justify-center items-center"
+        className="w-8 h-8 rounded-xl bg-card flex justify-center items-center"
       >
         {/* Insert a heart icon later */}
         <Heart size={24} color="#FB4141" fill="#FB4141" />
