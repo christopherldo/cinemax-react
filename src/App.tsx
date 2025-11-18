@@ -1,10 +1,14 @@
 import "./styles/App.css";
 
+import { Account } from "./components/Account";
+import { MovieList } from "./components/MovieList";
+
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello World!</h1>
-    </>
+    <main className="bg-[#1F1D2B] min-w-dvw min-h-dvh flex flex-col">
+      <Account />
+      <MovieList />
+    </main>
   );
 }
 
