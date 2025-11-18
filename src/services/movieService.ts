@@ -2,10 +2,8 @@ import type { Movie } from "../types/Movie";
 
 export const movieService = {
   async search(query: string): Promise<Movie[]> {
-    let json = {} as { results: Movie[] };
-
     const data = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${new URLSearchParams(
+      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
         query
       )}`,
       {
@@ -15,8 +13,7 @@ export const movieService = {
       }
     );
 
-    json = await data.json();
-
+    const json = (await data.json()) as { results: Movie[] };
     return json.results;
   },
 };

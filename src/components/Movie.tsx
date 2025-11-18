@@ -1,6 +1,8 @@
 import { Star } from "lucide-react";
 import type { Movie as MovieType } from "../types/Movie";
 import { formatVoteAverage } from "../utils/formatVoteAverage";
+import { MovieReleaseDate } from "./MovieReleaseDate";
+import { MovieGenres } from "./MovieGenres";
 
 interface MovieProps {
   movie: MovieType;
@@ -27,6 +29,8 @@ export const Movie = ({ movie }: MovieProps) => {
         <span className="block font-semibold text-[16px] truncate">
           {movie.title}
         </span>
+        <MovieReleaseDate releaseDateString={movie.release_date} />
+        <MovieGenres genreIds={movie.genre_ids} />
       </div>
     </div>
   );
