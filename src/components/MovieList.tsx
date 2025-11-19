@@ -7,12 +7,19 @@ export const MovieList = () => {
   const [movies, setMovies] = useState<MovieType[]>([]);
 
   useEffect(() => {
+    let ignore = false;
+
     const fetchData = async () => {
       const data = await movieService.search("Spider-Man");
-      setMovies(data);
+
+      if (!ignore) setMovies(data);
     };
 
     fetchData();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
 
   return (
