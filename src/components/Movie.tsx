@@ -25,7 +25,7 @@ export const Movie = ({ movie }: MovieProps) => {
           </span>
         </div>
       </div>
-      <div className="max-w-50 sm:max-w-full flex flex-1 flex-col gap-3">
+      <div className="max-w-52 sm:max-w-full flex flex-1 flex-col gap-3">
         <span className="block font-semibold text-[16px] truncate">
           {movie.title}
         </span>

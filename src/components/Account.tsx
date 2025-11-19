@@ -18,7 +18,7 @@ export const Account = () => {
       </div>
       <button
         type="button"
-        className="w-8 h-8 rounded-xl bg-soft flex justify-center items-center"
+        className="w-8 h-8 rounded-xl bg-soft flex justify-center items-center cursor-pointer"
       >
         {/* Insert a heart icon later */}
         <Heart size={24} color="#FB4141" fill="#FB4141" />
