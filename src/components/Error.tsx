@@ -7,7 +7,7 @@ interface ErrorProps {
 export const Error = ({ error }: ErrorProps) => {
   return error.length > 0 ? (
     <p className="text-red-400 col-span-full text-center">
-      Ocorreu um erro: {formatError(error)}
+      An error occurred: {formatError(error)}
     </p>
   ) : null;
 };
