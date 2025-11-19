@@ -2,10 +2,16 @@
 
 @theme {
   /* COLORS */
-  --color-background: #1f1d2b;
-  --color-card: #252836;
-  --color-text-muted: #92929d;
-  --color-accent: #12cdd9;
+  --color-dark: #1f1d2b;
+  --color-soft: #252836;
+  --color-blue-accent: #12cdd9;
+  --color-green: #22b07d;
+  --color-orange: #ff8700;
+  --color-red: #ff7256;
+  --color-black: #171725;
+  --color-dark-grey: #696974;
+  --color-grey: #92929d;
+  --color-line-dark: #eaeaea;
 }
 
 * {

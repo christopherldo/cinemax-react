@@ -6,7 +6,7 @@ interface MovieGenreProps {
 
 export const MovieGenre = ({ genreId }: MovieGenreProps) => {
   return (
-    <span className="font-medium text-text-muted text-[12px]">
+    <span className="font-medium text-grey text-[12px]">
       {formatGenre(genreId)}
     </span>
   );

@@ -12,13 +12,13 @@ export const Account = () => {
         <h1 className="font-semibold text-base text-white">
           Hello, Christopher
         </h1>
-        <h2 className="font-medium text-[12px] text-text-muted">
+        <h2 className="font-medium text-[12px] text-grey">
           Let's stream your favorite movie
         </h2>
       </div>
       <button
         type="button"
-        className="w-8 h-8 rounded-xl bg-card flex justify-center items-center"
+        className="w-8 h-8 rounded-xl bg-soft flex justify-center items-center"
       >
         {/* Insert a heart icon later */}
         <Heart size={24} color="#FB4141" fill="#FB4141" />
