@@ -19,6 +19,11 @@ export const MovieList = () => {
     let ignore = false;
 
     const fetchData = async () => {
+      if (!debouncedQ) {
+        setMovies([]);
+        return;
+      }
+
       setIsLoading(true);
 
       try {

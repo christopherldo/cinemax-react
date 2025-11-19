@@ -2,7 +2,7 @@ import { Filter, Search } from "lucide-react";
 
 interface SearchBarProps {
   q: string;
-  setQ: React.Dispatch<React.SetStateAction<string>>;
+  setQ: (newValue: string) => void;
   placeholder: string;
 }
 
