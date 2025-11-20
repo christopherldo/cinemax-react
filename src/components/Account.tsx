@@ -2,7 +2,7 @@ import { Heart } from "lucide-react";
 
 export const Account = () => {
   return (
-    <div className="flex items-center gap-4 mx-8 self-center mt-13 w-full max-w-md px-4">
+    <div className="flex items-center gap-4 mx-8 self-center mt-4 w-full max-w-md px-4">
       <img
         src="https://picsum.photos/40"
         alt="Profile picture"
@@ -19,8 +19,8 @@ export const Account = () => {
       <button
         type="button"
         className="w-8 h-8 rounded-xl bg-soft flex justify-center items-center cursor-pointer"
+        title="Favorite movies"
       >
-        {/* Insert a heart icon later */}
         <Heart size={24} color="#FB4141" fill="#FB4141" />
       </button>
     </div>
