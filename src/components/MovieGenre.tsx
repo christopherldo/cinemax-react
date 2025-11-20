@@ -1,3 +1,4 @@
+import { Film } from "lucide-react";
 import { formatGenre } from "../utils/formatGenre";
 
 interface MovieGenreProps {
@@ -6,8 +7,11 @@ interface MovieGenreProps {
 
 export const MovieGenre = ({ genreId }: MovieGenreProps) => {
   return (
-    <span className="font-medium text-grey text-[12px]">
-      {formatGenre(genreId)}
-    </span>
+    <div className="flex items-center gap-1">
+      <Film size={16} color="#92929D" />
+      <span className="font-medium text-grey text-[12px]">
+        {formatGenre(genreId)}
+      </span>
+    </div>
   );
 };

@@ -21,9 +21,11 @@ export const Movie = ({ movie }: MovieProps) => {
           moviePosterPath={movie.poster_path}
           movieTitle={movie.title}
         />
-        <MovieRate movieVoteAverage={movie.vote_average} />
+        <div className="absolute top-2 left-2">
+          <MovieRate movieVoteAverage={movie.vote_average} />
+        </div>
       </div>
-      <div className="max-w-52 sm:max-w-full flex flex-1 flex-col gap-3">
+      <div className="max-w-[60dvw] sm:max-w-full flex flex-1 flex-col gap-3">
         <MovieTitle movieTitle={movie.title} />
         <MovieReleaseDate releaseDateString={movie.release_date} />
         <MovieGenres genreIds={movie.genre_ids} />

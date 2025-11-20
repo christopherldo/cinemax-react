@@ -12,6 +12,7 @@
   --color-dark-grey: #696974;
   --color-grey: #92929d;
   --color-line-dark: #eaeaea;
+  --color-white-grey: #ebebef;
 }
 
 * {
@@ -35,7 +36,6 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
 }
 a:hover {

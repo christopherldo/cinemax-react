@@ -50,7 +50,7 @@ export const MovieList = () => {
   return (
     <>
       <SearchBar q={q} setQ={setQ} placeholder="Search a title..." />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-7xl mx-auto p-4 pb-22">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-7xl mx-auto p-4">
         <Loading isLoading={isLoading} />
         <ErrorComponent error={error} />
         {movies.map((movie) => (
