@@ -1,8 +1,10 @@
-import { Star } from "lucide-react";
 import type { Movie as MovieType } from "../types/Movie";
-import { formatVoteAverage } from "../utils/formatVoteAverage";
 import { MovieReleaseDate } from "./MovieReleaseDate";
 import { MovieGenres } from "./MovieGenres";
+import { Link } from "react-router-dom";
+import { MoviePoster } from "./MoviePoster";
+import { MovieRate } from "./MovieRate";
+import { MovieTitle } from "./MovieTitle";
 
 interface MovieProps {
   movie: MovieType;
@@ -10,28 +12,22 @@ interface MovieProps {
 
 export const Movie = ({ movie }: MovieProps) => {
   return (
-    <div className="flex gap-4 w-full max-w-sm min-w-0 mx-auto">
+    <Link
+      to={`/movie/${movie.id}`}
+      className="flex gap-4 w-full max-w-sm min-w-0 mx-auto"
+    >
       <div className="w-28 h-[147px] shrink-0 rounded-lg relative overflow-hidden">
-        <img
-          className="block w-full h-full "
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={`${movie.title} movie poster`}
-          draggable={false}
+        <MoviePoster
+          moviePosterPath={movie.poster_path}
+          movieTitle={movie.title}
         />
-        <div className="absolute flex items-center gap-1 top-2 left-2 py-1 px-2 bg-[rgba(37,40,54,0.32)] rounded-lg backdrop-blur-[20px]">
-          <Star size={16} color="#FF8700" fill="#FF8700" />
-          <span className="font-semibold text-[12px]">
-            {formatVoteAverage(movie.vote_average)}
-          </span>
-        </div>
+        <MovieRate movieVoteAverage={movie.vote_average} />
       </div>
       <div className="max-w-52 sm:max-w-full flex flex-1 flex-col gap-3">
-        <span className="block font-semibold text-[16px] truncate">
-          {movie.title}
-        </span>
+        <MovieTitle movieTitle={movie.title} />
         <MovieReleaseDate releaseDateString={movie.release_date} />
         <MovieGenres genreIds={movie.genre_ids} />
       </div>
-    </div>
+    </Link>
   );
 };
