@@ -4,55 +4,21 @@ import { MovieDuration } from "../components/MovieDuration";
 import { MovieGenre } from "../components/MovieGenre";
 import { MovieRate } from "../components/MovieRate";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { Error as ErrorComponent } from "../components/Error";
-import type { MovieWithDetails } from "../types/Movie";
-import { movieService } from "../services/movieService";
 import { MoviePoster } from "../components/MoviePoster";
 import { MovieDetailsBackground } from "../components/MovieDetailsBackground";
 import { BackButton } from "../components/BackButton";
 import { MovieTitle } from "../components/MovieTitle";
 import { MovieOverview } from "../components/MovieOverview";
 import { MovieDetailsActions } from "../components/MovieDetailsActions";
+import { useMovieDetails } from "../hooks/useMovieDetails";
 
 type RouteParams = { movieId?: string } & Record<string, string | undefined>;
 
 export const MoviePage = () => {
   const { movieId } = useParams<RouteParams>();
-
-  const [movie, setMovie] = useState<MovieWithDetails | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | string[]>("");
-
-  useEffect(() => {
-    let ignore = false;
-
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      if (!movieId) return;
-
-      try {
-        const data = await movieService.details(Number(movieId));
-        if (!ignore) setMovie(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error ocurred.");
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      ignore = true;
-    };
-  }, [movieId]);
+  const { error, isLoading, movie } = useMovieDetails(movieId);
 
   if (isLoading) return <Loading isLoading={true} />;
   if (error) return <ErrorComponent error={error} />;
