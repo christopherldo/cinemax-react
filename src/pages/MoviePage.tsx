@@ -54,60 +54,53 @@ export const MoviePage = () => {
     };
   }, [movieId]);
 
+  if (isLoading) return <Loading isLoading={true} />;
+  if (error) return <ErrorComponent error={error} />;
+  if (!movie) return null;
+
   return (
     <div>
-      <Loading isLoading={isLoading} />
-      <ErrorComponent error={error} />
-      {movie && (
-        <>
-          <div className="flex flex-col items-center pt-2 px-6 pb-1 relative">
-            <MovieDetailsBackground posterPath={movie.poster_path} />
-            <div className="flex flex-col items-center relative z-10 w-full">
-              <div className="flex w-full items-center justify-between">
-                <BackButton />
-                <div className="flex-1 flex justify-center max-w-[50dvw]">
-                  <MovieTitle movieTitle={movie.title} />
-                </div>
-                <button
-                  className="cursor-pointer"
-                  type="button"
-                  title="Favorite movie"
-                >
-                  <Heart size={32} color="#FB4141" fill="#FB4141" />
-                </button>
-              </div>
-              <div className="mt-6 w-52 h-[287px] rounded-2xl overflow-hidden">
-                <MoviePoster
-                  moviePosterPath={movie?.poster_path}
-                  movieTitle={movie?.title}
-                />
-              </div>
-              <div className="flex gap-3 mt-4">
-                <MovieReleaseDate releaseDateString={movie?.release_date} />
-                <div className="w-px bg-dark-grey" />
-                <MovieDuration runtime={movie?.runtime} />
-                <div className="w-px bg-dark-grey" />
-                <MovieGenre genreName={movie?.genres[0].name} />
-              </div>
-              <div className="mt-2">
-                <MovieRate movieVoteAverage={movie?.vote_average} />
-              </div>
-              <MovieDetailsActions />
+      <div className="flex flex-col items-center pt-2 px-6 pb-1 relative">
+        <MovieDetailsBackground posterPath={movie.poster_path} />
+        <div className="flex flex-col items-center relative z-10 w-full">
+          <div className="flex w-full items-center justify-between">
+            <BackButton />
+            <div className="flex-1 flex justify-center max-w-[50dvw]">
+              <MovieTitle movieTitle={movie.title} />
             </div>
+            <button
+              className="cursor-pointer"
+              type="button"
+              title="Favorite movie"
+            >
+              <Heart size={32} color="#FB4141" fill="#FB4141" />
+            </button>
           </div>
-          <div className="flex flex-col gap-6 mt-5 px-6 items-center">
-            <div className="flex flex-col gap-2">
-              <h1 className="font-semibold text-[16px] text-white">
-                Story Line
-              </h1>
-              <MovieOverview
-                homepage={movie.homepage}
-                overview={movie.overview}
-              />
-            </div>
+          <div className="mt-6 w-52 h-[287px] rounded-2xl overflow-hidden">
+            <MoviePoster
+              moviePosterPath={movie?.poster_path}
+              movieTitle={movie?.title}
+            />
           </div>
-        </>
-      )}
+          <div className="flex gap-3 mt-4">
+            <MovieReleaseDate releaseDateString={movie?.release_date} />
+            <div className="w-px bg-dark-grey" />
+            <MovieDuration runtime={movie?.runtime} />
+            <div className="w-px bg-dark-grey" />
+            <MovieGenre genreName={movie?.genres[0].name} />
+          </div>
+          <div className="mt-2">
+            <MovieRate movieVoteAverage={movie?.vote_average} />
+          </div>
+          <MovieDetailsActions />
+        </div>
+      </div>
+      <div className="flex flex-col gap-6 mt-5 px-6 items-center">
+        <div className="flex flex-col gap-2">
+          <h1 className="font-semibold text-[16px] text-white">Story Line</h1>
+          <MovieOverview homepage={movie.homepage} overview={movie.overview} />
+        </div>
+      </div>
     </div>
   );
 };
