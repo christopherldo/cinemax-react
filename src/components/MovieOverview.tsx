@@ -5,9 +5,9 @@ interface MovieOverviewProps {
 
 export const MovieOverview = ({ overview, homepage }: MovieOverviewProps) => {
   return (
-    <p className="font-normal text-[14px] text-white-grey">
+    <p className="font-normal text-[14px] text-text-main">
       {overview}{" "}
-      <a className="text-blue-accent" href={homepage} target="_blank">
+      <a className="text-accent" href={homepage} target="_blank">
         More
       </a>
     </p>

@@ -1,22 +1,56 @@
 @import "tailwindcss";
 
-@theme {
-  /* COLORS */
-  --color-dark: #1f1d2b;
-  --color-soft: #252836;
-  --color-blue-accent: #12cdd9;
-  --color-green: #22b07d;
-  --color-orange: #ff8700;
-  --color-red: #ff7256;
-  --color-black: #171725;
-  --color-dark-grey: #696974;
-  --color-grey: #92929d;
-  --color-line-dark: #eaeaea;
-  --color-white-grey: #ebebef;
+@layer base {
+  :root {
+    /* === LIGHT MODE === */
+    --color-background: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+
+    --text-main: #1f1d2b;
+    --text-muted: #92929d;
+
+    --line-color: #eaeaea;
+
+    --accent: #2ca8b0;
+    --accent-green: #22b07d;
+    --accent-orange: #ff8700;
+    --accent-red: #fb4141;
+  }
+
+  .dark {
+    /* === DARK MODE === */
+    --color-background: #1f1d2b;
+    --bg-card: #252836;
+    --bg-nav: #171725;
+
+    --text-main: #ebebef;
+    --text-muted: #92929d;
+
+    --line-color: #696974;
+
+    --accent: #12cdd9;
+  }
 }
 
-* {
-  box-sizing: border-box;
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: var(--color-background);
+  --color-dark-background: #1f1d2b;
+  --color-card: var(--bg-card);
+  --color-soft: var(--bg-card);
+  --color-navbar: var(--bg-nav);
+
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+
+  --color-line: var(--line-color);
+
+  --color-accent: var(--accent);
+  --color-green: var(--accent-green);
+  --color-orange: var(--accent-orange);
+  --color-red: var(--accent-red);
 }
 
 :root {
@@ -32,6 +66,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {

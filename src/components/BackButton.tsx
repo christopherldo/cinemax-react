@@ -13,7 +13,7 @@ export const BackButton = () => {
         navigate(-1);
       }}
     >
-      <ChevronLeft size={32} color="#FFFFFF" />
+      <ChevronLeft size={32} className="text-white" />
     </button>
   );
 };

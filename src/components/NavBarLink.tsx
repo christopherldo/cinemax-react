@@ -23,9 +23,7 @@ export const NavBarLink = ({ to, icon, label }: NavBarLinkProps) => {
               size={24}
             />
             {isActive && (
-              <span className="text-blue-accent font-medium block">
-                {label}
-              </span>
+              <span className="text-accent font-medium block">{label}</span>
             )}
           </div>
         )}

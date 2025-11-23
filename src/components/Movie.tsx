@@ -14,7 +14,7 @@ export const Movie = ({ movie }: MovieProps) => {
   return (
     <Link
       to={`/movie/${movie.id}`}
-      className="flex gap-4 w-full max-w-sm min-w-0 mx-auto"
+      className="flex gap-4 w-full max-w-sm min-w-0 mx-auto bg-card overflow-hidden p-2 rounded-2xl shadow-sm border-2 border-gray-200 dark:border-transparent dark:shadow-none"
     >
       <div className="w-28 h-[147px] shrink-0 rounded-lg relative overflow-hidden">
         <MoviePoster

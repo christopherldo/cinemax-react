@@ -17,7 +17,7 @@ export const MovieDetailsBackground = ({
       }}
     >
       <div className="absolute inset-0 bg-[#000000] opacity-76"></div>
-      <div className="absolute inset-0 bg-linear-to-b from-[#1f1d2b33] to-dark"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-[#1f1d2b33] to-background"></div>
     </div>
   );
 };

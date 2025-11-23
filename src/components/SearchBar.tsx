@@ -15,7 +15,7 @@ export const SearchBar = ({ q, setQ, placeholder }: SearchBarProps) => {
           type="text"
           name="q"
           id="searchInput"
-          className="flex-1 -mt-px"
+          className="flex-1 -mt-px placeholder:text-text-muted text-text-main"
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder={placeholder}
@@ -25,9 +25,9 @@ export const SearchBar = ({ q, setQ, placeholder }: SearchBarProps) => {
           title="Filter the content"
           className="flex gap-2 min-w-10 cursor-pointer"
         >
-          <div className="w-px h-4 bg-dark-grey" />
+          <div className="w-px h-4 bg-line" />
           <div className="flex-1 flex justify-center">
-            <Filter color="#FFFFFF" size={16} />
+            <Filter size={16} className="text-text-main" />
           </div>
         </button>
       </div>
