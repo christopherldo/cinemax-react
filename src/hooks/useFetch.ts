@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
-import type { Movie } from "../types/Movie";
-import { movieService } from "../services/movieService";
 
-export const useMovieSearch = (q: string) => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export const useFetch = <T>(url: string) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | string[]>("");
+  const [data, setData] = useState<T | null>(null);
 
   useEffect(() => {
     let ignore = false;
 
     const fetchData = async () => {
-      if (!q) {
-        setMovies([]);
-        return;
-      }
-
       setIsLoading(true);
 
       try {
-        const data = await movieService.search(q);
-        if (!ignore) setMovies(data);
+        const data = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+          },
+        });
+
+        const json = await data.json();
+
+        if (!ignore) setData(json as T);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -37,7 +37,7 @@ export const useMovieSearch = (q: string) => {
     return () => {
       ignore = true;
     };
-  }, [q]);
+  }, [url]);
 
-  return { movies, isLoading, error };
+  return { isLoading, error, data };
 };

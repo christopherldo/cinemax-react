@@ -10,10 +10,11 @@ import { MovieDetailsBackground } from "../components/MovieDetailsBackground";
 import { BackButton } from "../components/BackButton";
 import { MovieOverview } from "../components/MovieOverview";
 import { MovieDetailsActions } from "../components/MovieDetailsActions";
-import { useMovieDetails } from "../hooks/useMovieDetails";
 import { MovieTitle } from "../components/MovieTitle";
 import { MovieRate } from "../components/MovieRate";
 import { useTheme } from "../context/ThemeContext/useTheme";
+import { useFetch } from "../hooks/useFetch";
+import type { MovieWithDetails } from "../types/Movie";
 
 type RouteParams = { movieId?: string } & Record<string, string | undefined>;
 
@@ -21,7 +22,13 @@ export const MoviePage = () => {
   const { currentTheme } = useTheme();
 
   const { movieId } = useParams<RouteParams>();
-  const { error, isLoading, movie } = useMovieDetails(movieId);
+  const {
+    error,
+    isLoading,
+    data: movie,
+  } = useFetch<MovieWithDetails>(
+    `https://api.themoviedb.org/3/movie/${movieId}`
+  );
 
   if (isLoading) return <Loading isLoading={true} />;
   if (error) return <ErrorComponent error={error} />;
