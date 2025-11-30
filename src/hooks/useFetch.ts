@@ -12,13 +12,16 @@ export const useFetch = <T>(url: string) => {
       setIsLoading(true);
 
       try {
-        const data = await fetch(url, {
+        const response = await fetch(url, {
           headers: {
             Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
           },
         });
 
-        const json = await data.json();
+        if (!response.ok)
+          throw new Error(`Error: ${response.status} ${response.statusText}`);
+
+        const json = await response.json();
 
         if (!ignore) setData(json as T);
       } catch (error) {
