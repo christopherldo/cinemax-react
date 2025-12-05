@@ -53,7 +53,7 @@ export const MoviePage = () => {
             </button>
           </div>
           <div>
-            <div className="mt-6 w-52 lg:w-auto lg:min-h-90 lg:max-h-[70dvh] aspect-2/3 rounded-2xl overflow-hidden">
+            <div className="mt-6 w-52 mx-auto lg:w-auto lg:min-h-90 lg:max-h-[70dvh] aspect-2/3 rounded-2xl overflow-hidden">
               <MoviePoster
                 moviePosterPath={movie?.poster_path}
                 movieTitle={movie?.title}
