@@ -5,7 +5,7 @@ interface MovieOverviewProps {
 
 export const MovieOverview = ({ overview, homepage }: MovieOverviewProps) => {
   return (
-    <p className="font-normal text-[14px] text-text-main">
+    <p className="font-normal text-[14px] lg:text-lg text-text-main">
       {overview}{" "}
       <a className="text-accent" href={homepage} target="_blank">
         More

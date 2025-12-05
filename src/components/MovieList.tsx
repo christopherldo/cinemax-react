@@ -20,7 +20,7 @@ export const MovieList = () => {
   return (
     <>
       <SearchBar q={q} setQ={setQ} placeholder="Search a title..." />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full max-w-7xl mx-auto p-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 w-full max-w-7xl mx-auto p-4 lg:max-w-full">
         <Loading isLoading={isLoading} />
         <ErrorComponent error={error} />
         {data &&

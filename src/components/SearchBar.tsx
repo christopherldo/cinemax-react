@@ -9,7 +9,7 @@ interface SearchBarProps {
 export const SearchBar = ({ q, setQ, placeholder }: SearchBarProps) => {
   return (
     <div className="px-4 mt-4 w-full flex justify-center">
-      <div className="w-full max-w-5xl h-10 rounded-3xl bg-soft flex items-center self-center gap-2 px-4">
+      <div className="w-full max-w-5xl h-10 rounded-3xl bg-soft flex items-center self-center gap-2 px-4 lg:max-w-full">
         <Search color="#92929D" size={16} />
         <input
           type="text"

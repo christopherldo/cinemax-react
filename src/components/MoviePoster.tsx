@@ -8,7 +8,7 @@ interface MoviePoster {
 export const MoviePoster = ({ moviePosterPath, movieTitle }: MoviePoster) => {
   return (
     <img
-      className="block w-full h-full "
+      className="block w-full h-full"
       src={`${posterURL(moviePosterPath)}`}
       alt={`${movieTitle} movie poster`}
       draggable={false}

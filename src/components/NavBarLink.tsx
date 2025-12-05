@@ -9,7 +9,7 @@ interface NavBarLinkProps {
 
 export const NavBarLink = ({ to, icon, label }: NavBarLinkProps) => {
   return (
-    <li>
+    <li className="list-none">
       <NavLink to={to}>
         {({ isActive }) => (
           <div
@@ -23,7 +23,9 @@ export const NavBarLink = ({ to, icon, label }: NavBarLinkProps) => {
               size={24}
             />
             {isActive && (
-              <span className="text-accent font-medium block">{label}</span>
+              <span className="text-accent font-medium block lg:hidden">
+                {label}
+              </span>
             )}
           </div>
         )}

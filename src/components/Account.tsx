@@ -3,7 +3,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export const Account = () => {
   return (
-    <div className="flex items-center gap-4 mx-8 self-center mt-4 w-full max-w-md px-4">
+    <div className="flex items-center gap-4 mx-8 self-center mt-4 w-full max-w-md px-4 lg:max-w-full">
       <img
         src="https://picsum.photos/40"
         alt="Profile picture"

@@ -2,7 +2,7 @@ import { Download, Play, Share } from "lucide-react";
 
 export const MovieDetailsActions = () => {
   return (
-    <div className="flex gap-4 mt-6">
+    <div className="flex gap-4 mt-6 lg:justify-center">
       <button
         type="button"
         className="h-12 flex gap-2 items-center bg-orange rounded-4xl px-6 cursor-pointer"

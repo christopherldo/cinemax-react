@@ -9,7 +9,7 @@ export const MovieDetailsBackground = ({
 }: MovieDetailsBackgroundProps) => {
   return (
     <div
-      className="absolute inset-0 bg-cover bg-top"
+      className="absolute inset-0 bg-cover bg-top lg:fixed lg:bg-center"
       style={{
         backgroundImage: posterPath
           ? `url(${posterURL(posterPath)})`
@@ -17,7 +17,7 @@ export const MovieDetailsBackground = ({
       }}
     >
       <div className="absolute inset-0 bg-[#000000] opacity-76"></div>
-      <div className="absolute inset-0 bg-linear-to-b from-[#1f1d2b33] to-background"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-[#1f1d2b33] to-background lg:hidden"></div>
     </div>
   );
 };

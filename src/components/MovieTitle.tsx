@@ -11,7 +11,7 @@ export const MovieTitle = ({
 }: MovieTitleProps) => {
   return (
     <span
-      className={`block font-semibold text-[16px] truncate max-w-8/10 ${
+      className={`block font-semibold text-[16px] truncate max-w-8/10 lg:max-w-full ${
         !solidColor && "text-text-main"
       }`}
       style={{ color: solidColor ? color : undefined }}
