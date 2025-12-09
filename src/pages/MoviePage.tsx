@@ -85,9 +85,9 @@ export const MoviePage = () => {
             </div>
             <MovieDetailsActions />
           </div>
-          <div className="hidden lg:block flex-1 max-w-[50dvw]">
+          <div className="hidden lg:block flex-1 max-w-[50dvw] bg-background dark:bg-transparent p-4 rounded-2xl">
             <div className="flex gap-4 justify-center">
-              <div className="hidden lg:flex lg:flex-col text-5xl font-bold">
+              <div className="hidden lg:flex lg:flex-col text-5xl font-bold text-text-main">
                 {data.title}
               </div>
               <button
