@@ -26,6 +26,7 @@ export const MoviePage = () => {
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["movie", movieId],
     queryFn: () => MovieService.getMovie(movieId),
+    staleTime: 1000 * 60 * 60 * 24 * 30, // 1month
   });
 
   if (isPending) return <Loading isLoading={true} />;

@@ -13,8 +13,9 @@ export const MovieList = () => {
   const debouncedQ = useDebounce(q);
 
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ["movies"],
+    queryKey: ["movies", debouncedQ],
     queryFn: () => MovieService.getAllMovies(debouncedQ),
+    staleTime: 1000 * 60 * 10, // 10min,
   });
 
   return (

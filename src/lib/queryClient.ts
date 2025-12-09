@@ -1,12 +1,3 @@
 import { QueryClient } from "@tanstack/react-query";
 
-const MINUTE = 1000 * 60;
-
-export const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      gcTime: 10 * MINUTE, // 10min
-      staleTime: 10 * MINUTE, // 10min
-    },
-  },
-});
+export const queryClient = new QueryClient();
