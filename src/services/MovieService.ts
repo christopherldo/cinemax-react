@@ -2,9 +2,9 @@ import type { MovieWithDetails } from "../types/Movie";
 import type { MovieSearch } from "../types/MovieSearch";
 
 const MovieService = {
-  async getAllMovies(q: string) {
+  async getAllMovies(q: string, page = 1) {
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${q}`,
+      `https://api.themoviedb.org/3/search/movie?query=${q}&page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
