@@ -3,8 +3,23 @@ import { HomePage } from "../pages/HomePage";
 import { Root } from "../layouts/Root";
 import { ErrorPage } from "../pages/ErrorPage";
 import { MoviePage } from "../pages/MoviePage";
+import { WelcomePage } from "../pages/WelcomePage";
+import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
 
 export const router = createBrowserRouter([
+  {
+    path: "/welcome",
+    element: <WelcomePage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
   {
     path: "/",
     element: <Root />,

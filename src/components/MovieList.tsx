@@ -12,7 +12,7 @@ export const MovieList = () => {
   const [q, setQ] = useState("Spider-Man");
 
   const debouncedQ = useDebounce(q);
-  const { hasReachedEndOfPage } = useScroll(100);
+  const { hasReachedEndOfPage } = useScroll(200);
 
   const {
     isPending,
