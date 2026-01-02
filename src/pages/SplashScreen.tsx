@@ -1,15 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 
 export const SplashScreen = () => {
   const navigate = useNavigate();
 
-  const isLoggedIn = false;
+  const token = useAuthStore((state) => state.token);
+  const isLoggedIn = token !== null;
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (isLoggedIn === false) navigate("/welcome");
-    }, 5000); // 5s
+    }, 2000); // 2s
 
     return () => clearTimeout(timer);
   }, [isLoggedIn, navigate]);

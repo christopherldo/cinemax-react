@@ -6,6 +6,7 @@ import { MoviePage } from "../pages/MoviePage";
 import { WelcomePage } from "../pages/WelcomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage";
+import { WishlistPage } from "../pages/WishlistPage";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
       {
         path: "/movie/:movieId",
         element: <MoviePage />,
+      },
+      {
+        path: "/wishlist",
+        element: <WishlistPage />,
       },
     ],
   },

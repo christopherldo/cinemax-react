@@ -13,7 +13,7 @@ export const SplashContextProvider = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsFirstLoad(false);
-    }, 6000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);

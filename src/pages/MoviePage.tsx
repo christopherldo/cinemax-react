@@ -15,15 +15,23 @@ import { MovieRate } from "../components/MovieRate";
 import { useTheme } from "../context/ThemeContext/useTheme";
 import { useQuery } from "@tanstack/react-query";
 import MovieService from "../services/MovieService";
+import { useWishlistStore } from "../store/wishlistStore";
 
 type RouteParams = { movieId?: string } & Record<string, string | undefined>;
 
 export const MoviePage = () => {
+  const { addMovieToWishlist, wishlistMovieIds, removeMovieFromTheWishlist } =
+    useWishlistStore();
   const { currentTheme } = useTheme();
 
   const { movieId } = useParams<RouteParams>();
 
-  const { isPending, isError, data, error } = useQuery({
+  const {
+    isPending,
+    isError,
+    data: movie,
+    error,
+  } = useQuery({
     queryKey: ["movie", movieId],
     queryFn: () => MovieService.getMovie(movieId),
     staleTime: Infinity,
@@ -33,53 +41,66 @@ export const MoviePage = () => {
   if (isPending) return <Loading isLoading={true} />;
   if (isError) return <ErrorComponent error={error.message} />;
 
+  const handleClickOnAddToWishlistButton = () => {
+    if (wishlistMovieIds.includes(movie.id) === false) {
+      addMovieToWishlist(movie);
+    } else {
+      removeMovieFromTheWishlist(movie);
+    }
+  };
+
   return (
     <div className="lg:pl-22 lg:flex lg:w-full">
       <div className="flex flex-col ite ms-center pb-1 lg:pb-0 relative lg:w-full lg:static">
-        <MovieDetailsBackground posterPath={data.poster_path} />
+        <MovieDetailsBackground posterPath={movie.poster_path} />
         <div className="flex flex-col items-center relative z-10 w-full lg:h-full lg:flex-row lg:justify-evenly">
           <div className="pt-2 flex w-full items-center justify-between px-6 lg:fixed lg:pl-14 lg:top-0">
             <BackButton />
             <div className="flex-1 flex justify-center max-w-[50dvw] lg:hidden">
-              <MovieTitle movieTitle={data.title} solidColor color="white" />
+              <MovieTitle movieTitle={movie.title} solidColor color="white" />
             </div>
             <button
               className="cursor-pointer lg:hidden"
               type="button"
               title="Favorite movie"
+              onClick={handleClickOnAddToWishlistButton}
             >
-              <Heart size={32} className="text-red fill-red" />
+              <Heart
+                data-isfavorited={wishlistMovieIds.includes(movie.id)}
+                size={32}
+                className="fill-none data-[isfavorited=true]:fill-red data-[isfavorited=true]:text-red"
+              />
             </button>
           </div>
           <div>
             <div className="mt-6 w-52 mx-auto lg:w-auto lg:min-h-90 lg:max-h-[70dvh] aspect-2/3 rounded-2xl overflow-hidden">
               <MoviePoster
-                moviePosterPath={data.poster_path}
-                movieTitle={data.title}
+                moviePosterPath={movie.poster_path}
+                movieTitle={movie.title}
               />
             </div>
             <div className="flex gap-3 mt-4 lg:hidden">
               <MovieReleaseDate
-                releaseDateString={data.release_date}
+                releaseDateString={movie.release_date}
                 solidColor={currentTheme === "light"}
                 color="#252836"
               />
               <div className="w-px bg-dark-background dark:bg-line" />
               <MovieDuration
-                runtime={data.runtime}
+                runtime={movie.runtime}
                 solidColor={currentTheme === "light"}
                 color="#252836"
               />
               <div className="w-px bg-dark-background dark:bg-line" />
               <MovieGenre
-                genreName={data.genres[0].name}
+                genreName={movie.genres[0].name}
                 solidColor={currentTheme === "light"}
                 color="#252836"
               />
             </div>
             <div className="mt-2 flex justify-center lg:hidden">
               <MovieRate
-                movieVoteAverage={data.vote_average}
+                movieVoteAverage={movie.vote_average}
                 solidColor={currentTheme === "light"}
               />
             </div>
@@ -88,7 +109,7 @@ export const MoviePage = () => {
           <div className="hidden lg:block flex-1 max-w-[50dvw] bg-background dark:bg-transparent p-4 rounded-2xl">
             <div className="flex gap-4 justify-center">
               <div className="hidden lg:flex lg:flex-col text-5xl font-bold text-text-main">
-                {data.title}
+                {movie.title}
               </div>
               <button
                 className="hidden cursor-pointer -mt-2 lg:block"
@@ -100,25 +121,25 @@ export const MoviePage = () => {
             </div>
             <div className="flex gap-3 mt-4 justify-center">
               <MovieReleaseDate
-                releaseDateString={data.release_date}
+                releaseDateString={movie.release_date}
                 solidColor={currentTheme === "light"}
                 color="#252836"
               />
               <div className="w-px bg-dark-background dark:bg-line" />
               <MovieDuration
-                runtime={data.runtime}
+                runtime={movie.runtime}
                 solidColor={currentTheme === "light"}
                 color="#252836"
               />
               <div className="w-px bg-dark-background dark:bg-line" />
               <MovieGenre
-                genreName={data.genres[0].name}
+                genreName={movie.genres[0].name}
                 solidColor={currentTheme === "light"}
                 color="#252836"
               />
               <div className="w-px bg-dark-background dark:bg-line" />
               <MovieRate
-                movieVoteAverage={data.vote_average}
+                movieVoteAverage={movie.vote_average}
                 solidColor={currentTheme === "light"}
               />
             </div>
@@ -128,8 +149,8 @@ export const MoviePage = () => {
                   Story Line
                 </h1>
                 <MovieOverview
-                  homepage={data.homepage}
-                  overview={data.overview}
+                  homepage={movie.homepage}
+                  overview={movie.overview}
                 />
               </div>
             </div>
@@ -141,7 +162,7 @@ export const MoviePage = () => {
           <h1 className="font-semibold text-[16px] text-text-main">
             Story Line
           </h1>
-          <MovieOverview homepage={data.homepage} overview={data.overview} />
+          <MovieOverview homepage={movie.homepage} overview={movie.overview} />
         </div>
       </div>
     </div>
