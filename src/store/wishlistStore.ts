@@ -1,41 +1,51 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import type { MovieWithDetails } from "../types/Movie";
+import { persist } from "zustand/middleware";
 
 interface State {
   wishlistMovies: MovieWithDetails[];
-  wishlistMovieIds: number[];
 }
 
 interface Actions {
-  addMovieToWishlist: (movie: MovieWithDetails) => void;
-  removeMovieFromTheWishlist: (movie: MovieWithDetails) => void;
+  addMovieToWishlist: (movieToBeAdded: MovieWithDetails) => void;
+  removeMovieFromTheWishlist: (movieId: number) => void;
+  checkIsWishlisted: (searchingId: number) => boolean;
 }
 
 export const useWishlistStore = create<State & Actions>()(
-  immer((set, get) => ({
-    wishlistMovies: [],
-    wishlistMovieIds: [],
-    addMovieToWishlist(movie) {
-      set((state) => {
-        state.wishlistMovies.push(movie);
-        state.wishlistMovieIds.push(movie.id);
-      });
-    },
-    removeMovieFromTheWishlist(movie) {
-      const idToBeRemoved = movie.id;
+  persist(
+    immer((set, get) => ({
+      wishlistMovies: [],
+      wishlistMovieIds: [],
+      addMovieToWishlist(movieToBeAdded) {
+        const exists = get().wishlistMovies.some(
+          (movie) => movie.id === movieToBeAdded.id
+        );
 
-      const newWishlistMovieArray = get().wishlistMovies.filter(
-        (movie) => movie.id !== idToBeRemoved
-      );
-      const newWishlistMovieIdsArray = get().wishlistMovieIds.filter(
-        (wishlistedIds) => wishlistedIds !== idToBeRemoved
-      );
+        if (exists === false) {
+          set((state) => {
+            state.wishlistMovies.push(movieToBeAdded);
+          });
+        }
+      },
+      removeMovieFromTheWishlist(movieId) {
+        const index = get().wishlistMovies.findIndex(
+          (movie) => movie.id === movieId
+        );
 
-      set((state) => {
-        state.wishlistMovies = newWishlistMovieArray;
-        state.wishlistMovieIds = newWishlistMovieIdsArray;
-      });
-    },
-  }))
+        if (index !== -1) {
+          set((state) => {
+            state.wishlistMovies.splice(index, 1);
+          });
+        }
+      },
+      checkIsWishlisted(searchingId) {
+        return get().wishlistMovies.some((movie) => movie.id === searchingId);
+      },
+    })),
+    {
+      name: "wishlist-storage",
+    }
+  )
 );

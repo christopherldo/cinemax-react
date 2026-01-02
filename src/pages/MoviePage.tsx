@@ -20,7 +20,7 @@ import { useWishlistStore } from "../store/wishlistStore";
 type RouteParams = { movieId?: string } & Record<string, string | undefined>;
 
 export const MoviePage = () => {
-  const { addMovieToWishlist, wishlistMovieIds, removeMovieFromTheWishlist } =
+  const { addMovieToWishlist, checkIsWishlisted, removeMovieFromTheWishlist } =
     useWishlistStore();
   const { currentTheme } = useTheme();
 
@@ -42,10 +42,10 @@ export const MoviePage = () => {
   if (isError) return <ErrorComponent error={error.message} />;
 
   const handleClickOnAddToWishlistButton = () => {
-    if (wishlistMovieIds.includes(movie.id) === false) {
+    if (checkIsWishlisted(movie.id) === false) {
       addMovieToWishlist(movie);
     } else {
-      removeMovieFromTheWishlist(movie);
+      removeMovieFromTheWishlist(movie.id);
     }
   };
 
@@ -66,9 +66,9 @@ export const MoviePage = () => {
               onClick={handleClickOnAddToWishlistButton}
             >
               <Heart
-                data-isfavorited={wishlistMovieIds.includes(movie.id)}
+                data-iswhislisted={checkIsWishlisted(movie.id)}
                 size={32}
-                className="fill-none data-[isfavorited=true]:fill-red data-[isfavorited=true]:text-red"
+                className="fill-none data-[iswhislisted=true]:fill-red data-[iswhislisted=true]:text-red"
               />
             </button>
           </div>
