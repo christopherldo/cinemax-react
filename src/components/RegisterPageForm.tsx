@@ -1,13 +1,19 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Input } from "./Input";
 import { Link, useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface Inputs {
-  fullName: string;
-  email: string;
-  password: string;
-  agreeToTerms: boolean;
-}
+const schema = z.object({
+  fullName: z.string().min(3, "Name must be at least 3 characters"),
+  email: z.email("Invalid email"),
+  password: z.string().min(6, "Password must contain at least 6 characters"),
+  agreeToTerms: z.boolean().refine((val) => val === true, {
+    message: "You must accept the terms and services and the privacy policy",
+  }),
+});
+
+type FormData = z.infer<typeof schema>;
 
 export const RegisterPageForm = () => {
   const navigate = useNavigate();
@@ -16,9 +22,11 @@ export const RegisterPageForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
 
-  const onSubmit: SubmitHandler<Inputs> = () => {
+  const onSubmit: SubmitHandler<FormData> = () => {
     navigate("/");
   };
 
@@ -31,27 +39,21 @@ export const RegisterPageForm = () => {
         <Input
           label="Full Name"
           type="text"
-          {...register("fullName", {
-            required: "Full Name is required.",
-          })}
+          {...register("fullName")}
           errors={errors.fullName}
         />
 
         <Input
           label="Email Address"
           type="email"
-          {...register("email", {
-            required: "Email is required.",
-          })}
+          {...register("email")}
           errors={errors.email}
         />
 
         <Input
           label="Password"
           type="password"
-          {...register("password", {
-            required: "Password is required.",
-          })}
+          {...register("password")}
           errors={errors.password}
         />
 
