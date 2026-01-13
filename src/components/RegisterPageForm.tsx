@@ -3,15 +3,7 @@ import { Input } from "./Input";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const schema = z.object({
-  fullName: z.string().min(3, "Name must be at least 3 characters"),
-  email: z.email("Invalid email"),
-  password: z.string().min(6, "Password must contain at least 6 characters"),
-  agreeToTerms: z.boolean().refine((val) => val === true, {
-    message: "You must accept the terms and services and the privacy policy",
-  }),
-});
+import { schema } from "../schemas/authSchema";
 
 type FormData = z.infer<typeof schema>;
 
@@ -55,6 +47,13 @@ export const RegisterPageForm = () => {
           type="password"
           {...register("password")}
           errors={errors.password}
+        />
+
+        <Input
+          label="Confirm Password"
+          type="password"
+          {...register("confirmPassword")}
+          errors={errors.confirmPassword}
         />
 
         <div className="flex flex-col">
