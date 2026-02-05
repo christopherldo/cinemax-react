@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
 import { NavBar } from "../components/NavBar";
 import { SplashScreen } from "../pages/SplashScreen";
 import { useSplash } from "../context/SplashContext/useSplash";
+import { Outlet } from "react-router-dom";
 
 export const Root = () => {
   const { isFirstLoad } = useSplash();

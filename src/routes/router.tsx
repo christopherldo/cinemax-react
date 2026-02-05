@@ -7,6 +7,7 @@ import { WelcomePage } from "../pages/WelcomePage";
 import { LoginPage } from "../pages/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage";
 import { WishlistPage } from "../pages/WishlistPage";
+import { AuthGuard } from "../components/AuthGuard";
 
 export const router = createBrowserRouter([
   {
@@ -22,21 +23,26 @@ export const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
+    element: <AuthGuard />,
     children: [
       {
         path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/movie/:movieId",
-        element: <MoviePage />,
-      },
-      {
-        path: "/wishlist",
-        element: <WishlistPage />,
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+          {
+            path: "/movie/:movieId",
+            element: <MoviePage />,
+          },
+          {
+            path: "/wishlist",
+            element: <WishlistPage />,
+          },
+        ],
       },
     ],
   },

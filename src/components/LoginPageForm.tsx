@@ -1,8 +1,7 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Input } from "./Input";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/authStore";
-import { uuidv7 } from "uuidv7";
+import { useAuth } from "../context/AuthContext/useAuth";
 
 interface Inputs {
   email: string;
@@ -11,7 +10,7 @@ interface Inputs {
 
 export const LoginPageForm = () => {
   const navigate = useNavigate();
-  const logIn = useAuthStore((state) => state.logIn);
+  const { handleLoginWithPassword } = useAuth();
 
   const {
     register,
@@ -19,10 +18,13 @@ export const LoginPageForm = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    //TODO: VALIDATE ON BACKEND
-    logIn({ id: uuidv7(), email: data.email }, uuidv7());
-    navigate("/");
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      await handleLoginWithPassword(data.email, data.password);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

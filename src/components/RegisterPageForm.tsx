@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "../schemas/authSchema";
+import { useAuth } from "../context/AuthContext/useAuth";
 
 type FormData = z.infer<typeof schema>;
 
 export const RegisterPageForm = () => {
   const navigate = useNavigate();
+  const { handleRegisterWithPassword } = useAuth();
 
   const {
     register,
@@ -18,8 +20,23 @@ export const RegisterPageForm = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit: SubmitHandler<FormData> = () => {
-    navigate("/");
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      await handleRegisterWithPassword(
+        data.email,
+        data.password,
+        data.fullName,
+      );
+
+      // TODO: Exibir toast de sucesso para o usuário
+      alert(
+        "Conta criada! Verifique seu e-mail para confirmar antes de logar.",
+      );
+      navigate("/login");
+    } catch (error) {
+      // TODO: Exibir toast de erro para o usuário
+      console.error(error);
+    }
   };
 
   return (
