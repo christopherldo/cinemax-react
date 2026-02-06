@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema } from "../schemas/authSchema";
 import { useAuth } from "../context/AuthContext/useAuth";
+import { toast } from "react-toastify";
 
 type FormData = z.infer<typeof schema>;
 
@@ -34,8 +35,11 @@ export const RegisterPageForm = () => {
       );
       navigate("/login");
     } catch (error) {
-      // TODO: Exibir toast de erro para o usuário
-      console.error(error);
+      if (error instanceof Error) {
+        toast(error.message);
+      } else {
+        toast(`An unknown error occurred.`);
+      }
     }
   };
 

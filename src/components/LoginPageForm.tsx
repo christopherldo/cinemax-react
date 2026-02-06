@@ -2,6 +2,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { Input } from "./Input";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext/useAuth";
+import { toast } from "react-toastify";
 
 interface Inputs {
   email: string;
@@ -23,7 +24,11 @@ export const LoginPageForm = () => {
       await handleLoginWithPassword(data.email, data.password);
       navigate("/");
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        toast(error.message);
+      } else {
+        toast(`An unknown error occurred.`);
+      }
     }
   };
 

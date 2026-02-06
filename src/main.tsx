@@ -3,6 +3,7 @@ import "./styles/index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { router } from "./routes/router.tsx";
 import { ThemeContextProvider } from "./context/ThemeContext/ThemeContextProvider.tsx";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
         <SplashContextProvider>
           <ThemeContextProvider>
             <RouterProvider router={router} />
+            <ToastContainer />
           </ThemeContextProvider>
         </SplashContextProvider>
       </AuthContextProvider>
